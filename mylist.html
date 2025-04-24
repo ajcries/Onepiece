@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="fb:app_id" content="169554436525346" />
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg" />
+    <meta name="facebook-domain-verification" content="u13bkpxpi6xpwk0w2dlvwv23ocbqnt" />
+    <link rel="shortcut icon" href="https://i.fod.fujitv.co.jp/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="https://i.fod.fujitv.co.jp/img/favicon/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://i.fod.fujitv.co.jp/img/favicon/android-touch-icon.png" sizes="192x192">
+    <link rel="icon" href="https://i.fod.fujitv.co.jp/img/favicon/favicon.ico" type="image/vnd.microsoft.icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500,700,900&display=swap&subset=japanese" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>One Piece - My List</title>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #1a1a1a;
+        }
+        .list-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+    </style>
+    <script>
+        document.cookie = 'ontouchend_flg=' + (('ontouchend' in document) ? 'true' : 'false') + '; path=/;';
+    </script>
+</head>
+<body id="pagetop" class="min-h-screen text-white" oncontextmenu="return false;">
+    <div id="root">
+        <!-- Header -->
+        <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-yellow-400">One Piece</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="index.html" class="text-gray-300 hover:text-yellow-400">Home</a></li>
+                        <li><a href="seasons.html" class="text-gray-300 hover:text-yellow-400">Seasons</a></li>
+                        <li><a href="mylist.html" class="text-yellow-400 font-semibold">My List</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- My List Overview -->
+            <section class="mb-8">
+                <h2 class="text-3xl font-bold text-yellow-400 mb-4">My List</h2>
+                <p class="text-gray-300 mb-4">Your saved shows and movies, ready to watch anytime!</p>
+            </section>
+
+            <!-- Watchlist -->
+            <section>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="watchlist">
+                    <!-- Watchlist populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 py-4">
+            <div class="container mx-auto px-4 text-center text-gray-400">
+                <p>© 2025 One Piece Streaming. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const watchlist = [
+            { title: "One Piece", thumbnail: "https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg", url: "episode.html", description: "Follow Luffy's quest for the One Piece!" },
+            { title: "Show A", thumbnail: "https://via.placeholder.com/300x169?text=Show+A", url: "#", description: "A thrilling adventure series." },
+            { title: "Show B", thumbnail: "https://via.placeholder.com/300x169?text=Show+B", url: "#", description: "A dramatic tale of mystery." },
+        ];
+
+        const watchlistContainer = document.getElementById('watchlist');
+        watchlist.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'list-card bg-gray-800 rounded-lg shadow-lg overflow-hidden';
+            card.innerHTML = `
+                <a href="${item.url}">
+                    <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-32 object-cover">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-yellow-400">${item.title}</h4>
+                        <p class="text-gray-300 text-sm">${item.description}</p>
+                    </div>
+                </a>
+            `;
+            watchlistContainer.appendChild(card);
+        });
+    </script>
+</body>
+</html>

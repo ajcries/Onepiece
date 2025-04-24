@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="fb:app_id" content="169554436525346" />
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg" />
+    <meta name="facebook-domain-verification" content="u13bkpxpi6xpwk0w2dlvwv23ocbqnt" />
+    <link rel="shortcut icon" href="https://i.fod.fujitv.co.jp/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="https://i.fod.fujitv.co.jp/img/favicon/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://i.fod.fujitv.co.jp/img/favicon/android-touch-icon.png" sizes="192x192">
+    <link rel="icon" href="https://i.fod.fujitv.co.jp/img/favicon/favicon.ico" type="image/vnd.microsoft.icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500,700,900&display=swap&subset=japanese" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>One Piece - Season 22, Episode 1126</title>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #1a1a1a;
+        }
+        .episode-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        .current-episode .thumbnail-container {
+            position: relative;
+        }
+        .current-episode .play-button {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(250, 204, 21, 0.7);
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+        }
+        .current-episode:hover .play-button,
+        .current-episode.touched .play-button {
+            display: flex;
+        }
+        .current-episode .play-button::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid #000;
+            margin-left: 5px;
+        }
+        #video-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        #video-modal .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16 / 9;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        #video-modal iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0.5rem;
+        }
+        #video-modal .close-modal {
+            position: absolute;
+            top: -2.5rem;
+            right: -2.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: #1a1a1a;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #video-modal .close-modal:hover {
+            background-color: #facc15;
+            color: #000;
+        }
+        @media (max-width: 768px) {
+            #video-modal .modal-content {
+                max-width: 80%;
+            }
+            #video-modal .close-modal {
+                top: -2rem;
+                right: -2rem;
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+    <script>
+        document.cookie = 'ontouchend_flg=' + (('ontouchend' in document) ? 'true' : 'false') + '; path=/;';
+    </script>
+</head>
+<body id="pagetop" class="min-h-screen text-white" oncontextmenu="return false;">
+    <div id="root">
+        <!-- Header -->
+        <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-yellow-400">One Piece</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="index.html" class="text-gray-300 hover:text-yellow-400">Home</a></li>
+                        <li><a href="seasons.html" class="text-gray-300 hover:text-yellow-400">Seasons</a></li>
+                        <li><a href="my-list.html" class="text-gray-300 hover:text-yellow-400">My List</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="container mx-auto px-4 py-8">
+            <!-- Series Overview -->
+            <section class="mb-8">
+                <div class="flex flex-col md:flex-row items-center">
+                    <img src="https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg" alt="One Piece Thumbnail" class="w-full md:w-1/3 rounded-lg shadow-lg mb-4 md:mb-0 md:mr-6">
+                    <div>
+                        <h2 class="text-3xl font-bold text-yellow-400 mb-2">One Piece - Season 22</h2>
+                        <p class="text-gray-300 mb-4">Follow the adventures of Monkey D. Luffy and the Straw Hat Pirates as they sail the seas in search of the One Piece!</p>
+                        <p class="text-gray-400">Genre: Action, Adventure, Anime</p>
+                        <p class="text-gray-400">Episode 1126: Looming Despair! Admiral Kizaru's Depressing Mission</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Episode List -->
+            <section>
+                <h3 class="text-xl font-semibold text-yellow-400 mb-4">Episodes - Season 22</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="episode-list">
+                    <!-- Episodes populated by JavaScript -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Video Modal -->
+        <div id="video-modal">
+            <div class="modal-content">
+                <button id="close-modal" class="close-modal">✕</button>
+                <div id="modal-video"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 py-4">
+            <div class="container mx-auto px-4 text-center text-gray-400">
+                <p>© 2025 One Piece Streaming. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        const episodes = [
+            { number: 1126, title: "Looming Despair! Admiral Kizaru's Depressing Mission", date: "Apr. 20, 2025", thumbnail: "https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg", url: "https://play.netembed.co/tv.php?id=37854&season=22&episode=1126" },
+            { number: 1127, title: "TBA", date: "Apr. 27, 2025", thumbnail: "https://via.placeholder.com/300x169?text=Episode+1127", url: "#" },
+            { number: 1128, title: "TBA", date: "May 4, 2025", thumbnail: "https://via.placeholder.com/300x169?text=Episode+1128", url: "#" },
+        ];
+
+        const episodeList = document.getElementById('episode-list');
+        const videoModal = document.getElementById('video-modal');
+        const modalVideo = document.getElementById('modal-video');
+        const closeModal = document.getElementById('close-modal');
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        episodes.forEach(episode => {
+            const card = document.createElement('div');
+            card.className = `episode-card bg-gray-800 rounded-lg shadow-lg overflow-hidden ${episode.number === 1126 ? 'current-episode cursor-pointer' : ''}`;
+            card.innerHTML = `
+                <div class="${episode.number === 1126 ? 'thumbnail-container' : ''}">
+                    <img src="${episode.thumbnail}" alt="Episode ${episode.number}" class="w-full h-32 object-cover">
+                    ${episode.number === 1126 ? '<div class="play-button"></div>' : ''}
+                </div>
+                <div class="p-4">
+                    <h4 class="text-lg font-semibold text-yellow-400">Episode ${episode.number}</h4>
+                    <p class="text-gray-300">${episode.title}</p>
+                    <p class="text-gray-400 text-sm">${episode.date}</p>
+                </div>
+            `;
+            if (episode.number === 1126) {
+                card.addEventListener('click', () => {
+                    modalVideo.innerHTML = `<iframe src="${episode.url}" allowfullscreen></iframe>`;
+                    videoModal.style.display = 'flex';
+                });
+
+                // Handle touch/mouse interactions for play button
+                if (isTouchDevice) {
+                    card.addEventListener('touchstart', () => {
+                        card.classList.add('touched');
+                        setTimeout(() => card.classList.remove('touched'), 1000); // Hide after 1s
+                    });
+                }
+            }
+            episodeList.appendChild(card);
+        });
+
+        closeModal.addEventListener('click', () => {
+            videoModal.style.display = 'none';
+            modalVideo.innerHTML = ''; // Clear iframe to stop playback
+        });
+
+        // Close modal when clicking outside the video
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.style.display = 'none';
+                modalVideo.innerHTML = '';
+            }
+        });
+    </script>
+</body>
+</html>

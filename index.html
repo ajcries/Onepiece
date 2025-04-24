@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta property="fb:app_id" content="169554436525346" />
+    <meta property="og:image" content="https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg" />
+    <meta name="facebook-domain-verification" content="u13bkpxpi6xpwk0w2dlvwv23ocbqnt" />
+    <link rel="shortcut icon" href="https://i.fod.fujitv.co.jp/img/favicon/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon-precomposed" href="https://i.fod.fujitv.co.jp/img/favicon/apple-touch-icon.png" sizes="180x180">
+    <link rel="icon" type="image/png" href="https://i.fod.fujitv.co.jp/img/favicon/android-touch-icon.png" sizes="192x192">
+    <link rel="icon" href="https://i.fod.fujitv.co.jp/img/favicon/favicon.ico" type="image/vnd.microsoft.icon">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,500,700,900&display=swap&subset=japanese" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <title>One Piece Streaming</title>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background-color: #1a1a1a;
+        }
+        .carousel-item:hover, .channel-card:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        #carousel {
+            scroll-behavior: smooth;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        #carousel::-webkit-scrollbar {
+            display: none;
+        }
+        .channel-card .thumbnail-container {
+            position: relative;
+        }
+        .channel-card .play-button {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background-color: rgba(250, 204, 21, 0.7);
+            border-radius: 50%;
+            justify-content: center;
+            align-items: center;
+        }
+        .channel-card:hover .play-button,
+        .channel-card.touched .play-button {
+            display: flex;
+        }
+        .channel-card .play-button::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 15px solid transparent;
+            border-bottom: 15px solid transparent;
+            border-left: 25px solid #000;
+            margin-left: 5px;
+        }
+        #live-tv-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+        #live-tv-modal .modal-content {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            aspect-ratio: 16 / 9;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        #live-tv-modal video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0.5rem;
+        }
+        #live-tv-modal .error-message {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            font-size: 1.25rem;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        #live-tv-modal .close-modal {
+            position: absolute;
+            top: -2.5rem;
+            right: -2.5rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: #1a1a1a;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        #live-tv-modal .close-modal:hover {
+            background-color: #facc15;
+            color: #000;
+        }
+        @media (max-width: 768px) {
+            #live-tv-modal .modal-content {
+                max-width: 80%;
+            }
+            #live-tv-modal .close-modal {
+                top: -2rem;
+                right: -2rem;
+                width: 2.5rem;
+                height: 2.5rem;
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+    <script>
+        document.cookie = 'ontouchend_flg=' + (('ontouchend' in document) ? 'true' : 'false') + '; path=/;';
+    </script>
+</head>
+<body id="pagetop" class="min-h-screen text-white" oncontextmenu="return false;">
+    <div id="root">
+        <!-- Header -->
+        <header class="bg-gray-900 shadow-lg sticky top-0 z-50">
+            <div class="container mx-auto px-4 py-4 flex items-center justify-between">
+                <h1 class="text-2xl font-bold text-yellow-400">One Piece Streaming</h1>
+                <nav>
+                    <ul class="flex space-x-4">
+                        <li><a href="index.html" class="text-yellow-400 font-semibold">Home</a></li>
+                        <li><a href="seasons.html" class="text-gray-300 hover:text-yellow-400">Seasons</a></li>
+                        <li><a href="my-list.html" class="text-gray-300 hover:text-yellow-400">My List</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero Banner -->
+        <section class="relative bg-cover bg-center h-96" style="background-image: url('https://image.tmdb.org/t/p/w1280/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg');">
+            <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center">
+                <div class="container mx-auto px-4">
+                    <h2 class="text-4xl font-bold text-yellow-400 mb-2">One Piece - Season 22</h2>
+                    <p class="text-gray-200 mb-4 max-w-md">Join Luffy and the Straw Hats in their latest adventure!</p>
+                    <a href="episode.html" class="bg-yellow-400 text-gray-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-500">Watch Episode 1126</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Episodes Carousel -->
+        <section class="container mx-auto px-4 py-8">
+            <h3 class="text-2xl font-semibold text-yellow-400 mb-4">Featured Episodes</h3>
+            <div id="carousel" class="flex overflow-x-auto space-x-4 pb-4">
+                <!-- Episodes populated by JavaScript -->
+            </div>
+            <div class="flex justify-between mt-4">
+                <button id="prev" class="bg-gray-700 text-white px-4 py-2 rounded-lg">Previous</button>
+                <button id="next" class="bg-gray-700 text-white px-4 py-2 rounded-lg">Next</button>
+            </div>
+        </section>
+
+        <!-- Live TV Section -->
+        <section class="container mx-auto px-4 py-8">
+            <h3 class="text-2xl font-semibold text-yellow-400 mb-4">Live TV</h3>
+            <div id="live-tv-channel" class="flex justify-center">
+                <!-- Fuji TV channel populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Live TV Modal -->
+        <div id="live-tv-modal">
+            <div class="modal-content">
+                <button id="close-live-modal" class="close-modal">✕</button>
+                <div id="live-modal-video">
+                    <video id="live-video" controls autoplay></video>
+                    <div id="error-message" class="error-message">Unable to play Fuji TV. Please try again later.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-gray-900 py-4">
+            <div class="container mx-auto px-4 text-center text-gray-400">
+                <p>© 2025 One Piece Streaming. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Episode Carousel
+        const episodes = [
+            { number: 1126, title: "Looming Despair! Admiral Kizaru's Depressing Mission", thumbnail: "https://image.tmdb.org/t/p/w500/7zrYpzUPZste7ebAnkV6CHIB4eV.jpg", url: "episode.html" },
+            { number: 1127, title: "TBA", thumbnail: "https://via.placeholder.com/300x169?text=Episode+1127", url: "#" },
+            { number: 1128, title: "TBA", thumbnail: "https://via.placeholder.com/300x169?text=Episode+1128", url: "#" },
+        ];
+
+        const carousel = document.getElementById('carousel');
+        episodes.forEach(episode => {
+            const item = document.createElement('div');
+            item.className = 'carousel-item flex-none w-64 bg-gray-800 rounded-lg shadow-lg';
+            item.innerHTML = `
+                <a href="${episode.url}">
+                    <img src="${episode.thumbnail}" alt="Episode ${episode.number}" class="w-full h-36 object-cover rounded-t-lg">
+                    <div class="p-4">
+                        <h4 class="text-lg font-semibold text-yellow-400">Episode ${episode.number}</h4>
+                        <p class="text-gray-300 text-sm">${episode.title}</p>
+                    </div>
+                </a>
+            `;
+            carousel.appendChild(item);
+        });
+
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        prev.addEventListener('click', () => carousel.scrollBy({ left: -256, behavior: 'smooth' }));
+        next.addEventListener('click', () => carousel.scrollBy({ left: 256, behavior: 'smooth' }));
+
+        // Live TV Section (Fuji TV only)
+        const fujiTvChannel = {
+            group: "Tokyo",
+            tvgId: "fuji_tv",
+            logo: "https://upload.wikimedia.org/wikipedia/fr/thumb/6/65/Fuji_TV_Logo.svg/1049px-Fuji_TV_Logo.svg.png",
+            name: "Fuji TV",
+            url: "https://your-server/fuji-proxy.php", // Replace with your server URL
+            scheduleUrl: "https://www.fujitv.co.jp/timetable/",
+            referrer: "https://www.fujitv.co.jp/",
+            userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36"
+        };
+
+        const liveTvChannel = document.getElementById('live-tv-channel');
+        const liveTvModal = document.getElementById('live-tv-modal');
+        const liveModalVideo = document.getElementById('live-modal-video');
+        const liveVideo = document.getElementById('live-video');
+        const errorMessage = document.getElementById('error-message');
+        const closeLiveModal = document.getElementById('close-live-modal');
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
+        // Populate Fuji TV channel card
+        const card = document.createElement('div');
+        card.className = 'channel-card w-64 bg-gray-800 rounded-lg shadow-lg';
+        card.innerHTML = `
+            <div class="thumbnail-container">
+                <img src="${fujiTvChannel.logo}" alt="${fujiTvChannel.name}" class="w-full h-36 object-contain rounded-t-lg bg-white">
+                <div class="play-button"></div>
+            </div>
+            <div class="p-4">
+                <a href="${fujiTvChannel.scheduleUrl}" target="_blank" class="text-lg font-semibold text-yellow-400 hover:underline">${fujiTvChannel.name}</a>
+            </div>
+        `;
+        card.addEventListener('click', () => {
+            liveTvModal.style.display = 'flex';
+            playChannel(fujiTvChannel.url, fujiTvChannel.referrer, fujiTvChannel.userAgent);
+        });
+
+        if (isTouchDevice) {
+            card.addEventListener('touchstart', () => {
+                card.classList.add('touched');
+                setTimeout(() => card.classList.remove('touched'), 1000);
+            });
+        }
+
+        liveTvChannel.appendChild(card);
+
+        // Function to play HLS stream
+        function playChannel(url, referrer, userAgent) {
+            liveVideo.style.display = 'block';
+            errorMessage.style.display = 'none';
+
+            if (Hls.isSupported()) {
+                const hls = new Hls({
+                    xhrSetup: (xhr) => {
+                        if (referrer) xhr.setRequestHeader('Referer', referrer);
+                        if (userAgent) xhr.setRequestHeader('User-Agent', userAgent);
+                    }
+                });
+                hls.loadSource(url);
+                hls.attachMedia(liveVideo);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    liveVideo.play().catch(err => {
+                        console.error('Playback error:', err);
+                        showError();
+                    });
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    if (data.fatal) {
+                        console.error('HLS error:', data);
+                        showError();
+                    }
+                });
+            } else if (liveVideo.canPlayType('application/vnd.apple.mpegurl')) {
+                liveVideo.src = url;
+                liveVideo.play().catch(err => {
+                    console.error('Playback error:', err);
+                    showError();
+                });
+            } else {
+                showError();
+            }
+        }
+
+        function showError() {
+            liveVideo.style.display = 'none';
+            errorMessage.style.display = 'block';
+        }
+
+        // Modal close functionality
+        closeLiveModal.addEventListener('click', () => {
+            liveTvModal.style.display = 'none';
+            liveVideo.pause();
+            liveVideo.src = '';
+            liveModalVideo.innerHTML = '<video id="live-video" controls autoplay></video><div id="error-message" class="error-message">Unable to play Fuji TV. Please try again later.</div>';
+        });
+
+        liveTvModal.addEventListener('click', (e) => {
+            if (e.target === liveTvModal) {
+                liveTvModal.style.display = 'none';
+                liveVideo.pause();
+                liveVideo.src = '';
+                liveModalVideo.innerHTML = '<video id="live-video" controls autoplay></video><div id="error-message" class="error-message">Unable to play Fuji TV. Please try again later.</div>';
+            }
+        });
+    </script>
+</body>
+</html>
